@@ -1,0 +1,19 @@
+{
+"TobbieII|block": "寶比程式方塊",
+
+"TobbieII.Read_RBlock|block": "讀取右側紅外線測距值(0~1024)",
+"TobbieII.Read_LBlock|block": "讀取左側紅外線測距值(0~1024)",
+"TobbieII.RBlock|block": "右側IR值是否大於 %thresholdR|值 ",
+"TobbieII.LBlock|block": "左側IR值是否大於 %thresholdL|值 ",
+"TobbieII.forward|block": "寶比II向前行走",
+"TobbieII.backward|block": "寶比II向後行走",
+"TobbieII.stopwalk|block": "寶比II停止行走",
+"TobbieII.rightward|block": "寶比II向右旋轉",
+"TobbieII.leftward|block": "寶比II向左旋轉",
+"TobbieII.stopturn|block": "寶比II停止旋轉",
+"TobbieII.vibrate|block": "寶比II踱步 %time|次 ",
+"TobbieII.shake_head|block": "寶比II搖搖頭 %time|次 ",
+"TobbieII.dance|block": "寶比II愛跳舞 %time|次 ", 
+"TobbieII.drawface|block": "顯示寶比II表情 %RX_Data|(APP專用)"
+}
+
