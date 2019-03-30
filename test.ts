@@ -2,9 +2,9 @@
 basic.forever(function () {
     TobbieII.forward()
     basic.pause(1000)
-    TobbieII.stopwalk()
+    TobbieII.stopWalk()
     basic.pause(1000)
     TobbieII.backward()
     basic.pause(1000)
-    TobbieII.stopwalk()
+    TobbieII.stopWalk()
 })

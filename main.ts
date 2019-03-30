@@ -1,18 +1,10 @@
 //% weight=0 color=#FF8B27 icon="\uf1b9" block="TobbieII"
 //uf1b9
-namespace TobbieII {
-    let ADL_R: number = 0;
-    let ADH_R: number = 0;
-    let ADL_L: number = 0;
-    let ADH_L: number = 0;
-    let Read_LIR: number = 0;
-    let Read_RIR: number = 0;
+namespace TobbieII {    
     let event_src_ir = 12;
     let event_ir_sensor = 1;
     let Motor_R: boolean = false;
     let Motor_L: boolean = false;
-    let PX: number = 0;
-    let PY: number = 0;
     let Force: number = 10;
     
    function IR_sensorL(irdataL: number) {   //此為中斷觸發方塊
@@ -69,11 +61,14 @@ namespace TobbieII {
 //        )
 //    }
  
-    /** Read the value sensed by the right side of the infrared sensor.
+    /** Read the value sensed by the right side of the infrared sensor(return 0 to 1024).
     */
-    //% blockId="Read_RBolck" block="get right IR data(return 0~1024)"
+    //% blockId="Read_RBolck" block="get right IR data"
     //% blockGap=5 weight=65                 //與下一個方塊的間隙及排重
     export function Read_RBlock() :number {
+        let ADL_R: number = 0;
+        let ADH_R: number = 0;
+        let Read_RIR: number = 0;
         ADL_R = pins.analogReadPin(AnalogPin.P2)
         pins.digitalWritePin(DigitalPin.P12, 1)
         control.waitMicros(250)
@@ -82,11 +77,14 @@ namespace TobbieII {
         if (pins.digitalReadPin(DigitalPin.P8) == 1) Read_RIR = ADH_R - ADL_R;
         return (Read_RIR)     
     }
-    /** Read the value sensed by the left side of the infrared sensor.
+    /** Read the value sensed by the left side of the infrared sensor(return 0 to 1024).
     */
-    //% blockId="Read_LBolck" block="get left IR data(trtuen 0~1024)"
+    //% blockId="Read_LBolck" block="get left IR data"
     //% blockGap=15 weight=60                 //與下一個方塊的間隙及排重
     export function Read_LBlock() :number {
+        let ADL_L: number = 0;
+        let ADH_L: number = 0;
+        let Read_LIR: number = 0;
         ADL_L = pins.analogReadPin(AnalogPin.P1)
         pins.digitalWritePin(DigitalPin.P12, 1)
         control.waitMicros(250)
@@ -104,6 +102,8 @@ namespace TobbieII {
     //% thresholdR.min=0 thresholdR.max=1023
     //% blockGap=5 weight=58
     export function RBlock(thresholdR: number = 512 ) :boolean {
+        let ADL_R: number = 0;
+        let ADH_R: number = 0;
         ADL_R = pins.analogReadPin(AnalogPin.P2)
         pins.digitalWritePin(DigitalPin.P12, 1)
         control.waitMicros(250)
@@ -126,6 +126,8 @@ namespace TobbieII {
     //% thresholdL.min=0 thresholdL.max=1023
     //% blockGap=10 weight=57
     export function LBlock(thresholdL: number=512 ) :boolean {
+        let ADL_L: number = 0;
+        let ADH_L: number = 0;
         ADL_L = pins.analogReadPin(AnalogPin.P1)
         pins.digitalWritePin(DigitalPin.P12, 1)
         control.waitMicros(250)
@@ -207,18 +209,18 @@ namespace TobbieII {
     /**
     *Tobbie-II stops walking.
     */
-    //% blockId="stopwalk" block="Tobbie-II stop walking"
+    //% blockId="stopWalk" block="Tobbie-II stop walking"
     //% blockGap=10 weight=33
-    export function stopwalk() {
+    export function stopWalk() {
         pins.digitalWritePin(DigitalPin.P13, 0)
         pins.digitalWritePin(DigitalPin.P14, 0)
     }
     /**
     *Tobbie-II rotates to the right.
     */
-    //% blockId="rightward" block="Tobbie-II turns right"
+    //% blockId="rightWard" block="Tobbie-II turns right"
     //% blockGap=3  weight=32
-    export function rightward() {
+    export function rightWard() {
         pins.digitalWritePin(DigitalPin.P15, 0)
         pins.digitalWritePin(DigitalPin.P16, 1)
         Motor_L=false
@@ -227,9 +229,9 @@ namespace TobbieII {
     /**
     *Tobbie-II rotates to the left.
     */
-    //% blockId="leftward" block="Tobbie-II turns left"
+    //% blockId="leftWard" block="Tobbie-II turns left"
     //% blockGap=3  weight=31
-    export function leftward() {
+    export function leftWard() {
        pins.digitalWritePin(DigitalPin.P15, 1)
         pins.digitalWritePin(DigitalPin.P16, 0)
         Motor_L=true
@@ -238,9 +240,9 @@ namespace TobbieII {
     /**
     *Tobbie-II stops rotating.
     */
-    //% blockId="stopturn" block="Tobbie-II stops rotating."
+    //% blockId="stopTurn" block="Tobbie-II stops rotating."
     //% blockGap=10 weight=30
-    export function stopturn() {
+    export function stopTurn() {
         if (Motor_L || Motor_R) {
             if (Motor_R) { 
                 pins.digitalWritePin(DigitalPin.P15, 1)
@@ -267,6 +269,7 @@ namespace TobbieII {
     //% blockGap=5 weight=25
     //% advanced=true
     export function vibrate(time:number) :void{
+        if (time>100) {time=100;}
         for (let i = 0; i < time; i++){
             pins.digitalWritePin(DigitalPin.P13, 1)  //向前
             pins.digitalWritePin(DigitalPin.P14, 0)
