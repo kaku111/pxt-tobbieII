@@ -269,7 +269,6 @@ namespace TobbieII {
     //% blockGap=5 weight=25
     //% advanced=true
     export function vibrate(time:number) :void{
-        if (time>100) {time=100;}
         for (let i = 0; i < time; i++){
             pins.digitalWritePin(DigitalPin.P13, 1)  //向前
             pins.digitalWritePin(DigitalPin.P14, 0)
