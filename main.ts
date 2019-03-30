@@ -269,6 +269,7 @@ namespace TobbieII {
     //% blockGap=5 weight=25
     //% advanced=true
     export function vibrate(time:number) :void{
+        if(time>100) {time=100}
         for (let i = 0; i < time; i++){
             pins.digitalWritePin(DigitalPin.P13, 1)  //向前
             pins.digitalWritePin(DigitalPin.P14, 0)
@@ -289,6 +290,7 @@ namespace TobbieII {
     //% blockGap=5 weight=26
     //% advanced=true
     export function shake_head(time:number) :void{
+        if(time>100) {time=100}
         for (let i = 0; i < time; i++){
             pins.digitalWritePin(DigitalPin.P15, 1)  //左轉
             pins.digitalWritePin(DigitalPin.P16, 0)
@@ -309,6 +311,7 @@ namespace TobbieII {
     //% blockGap=5 weight=24
     //% advanced=true
     export function dance(time:number) :void{
+        if(time>100) {time=100}
         for (let i = 0; i < time; i++){
             pins.digitalWritePin(DigitalPin.P13, 0)  //向後
             pins.digitalWritePin(DigitalPin.P14, 1)
