@@ -5,7 +5,7 @@ namespace TobbieII {
     let event_ir_sensor = 1;
     let Motor_R: boolean = false;
     let Motor_L: boolean = false;
-    let Force: number = 10;
+     let Force: number = 10;
     
    function IR_sensorL(irdataL: number) {   //此為中斷觸發方塊
        control.inBackground(() => {
