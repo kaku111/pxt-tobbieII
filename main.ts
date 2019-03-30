@@ -333,7 +333,7 @@ namespace TobbieII {
     //% blockId="BLE_DOT" block="Tobbie II shows mood on face(APP only) %RX_Data"
     //% blockGap=5 weight=23
     //% advanced=true
-    export function drawface(RX_Data: string): void{
+    export function drawFace(RX_Data: string): void{
         basic.clearScreen()
         for (let PY = 0; PY <= 4; PY++) {
             let PLOT_DATA:number = parseInt(RX_Data.substr(PY * 2 + 1, 2))
